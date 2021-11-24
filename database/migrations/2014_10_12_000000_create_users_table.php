@@ -24,7 +24,7 @@ class CreateUsersTable extends Migration
             $table->string('password', 100)->comment("비밀번호");
             $table->string('phone_number', 20)->comment("연락처");
             $table->string('email', 100)->comment("이메일");
-            $table->string("gender", 1)->comment("성별 (M: 남, F: 여)");
+            $table->enum("gender", ["M", "F"])->comment("성별 (M: 남, F: 여)");
             $table->timestamps();
 
             $table->unique("username");

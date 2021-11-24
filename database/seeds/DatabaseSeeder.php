@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
                 "password" => "test123",
                 "phone_number" => "01012341234",
                 "email" => "test@test.com",
-                "gender" => 0,
+                "gender" => "M",
             ]
         );
     }

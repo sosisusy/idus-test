@@ -3,7 +3,7 @@
 
 ### 구성
 PHP 7.4  
-Laravel 7.*  
+Laravel 7.30.5  
 MySQL 5.7  
 NGINX  
 
@@ -22,8 +22,8 @@ docker-compose exec php-fpm composer install
 cp .env.example .env
 
 # 어플리케이션 키 생성
-php artisan key:generate
+docker-compose exec php-fpm php artisan key:generate
 
 # 테이블 생성
-php artisan migrate --seed
+docker-compose exec php-fpm php artisan migrate --seed
 ```

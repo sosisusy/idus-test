@@ -1,0 +1,114 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "idus API",
+        "description": "\n Request 인증\n - `/api/token` 엔드포인트에서 인증 토큰을 발급 받을 수 있습니다.\n - Request Header `Authorization` 필드 안에 `bearer <auth-token>` 형태로 인증 토큰을 기입 후 요청해주시면 됩니다.\n",
+        "version": "0.1"
+    },
+    "paths": {
+        "/api/register": {
+            "post": {
+                "tags": [
+                    "Login"
+                ],
+                "summary": "회원 가입",
+                "description": "",
+                "operationId": "a39949df013c1eb78ff8bd8f481d408a",
+                "responses": {
+                    "200": {
+                        "description": "성공",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ResponseError"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "유효성 검사 실패",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ResponseError"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "ResponseData": {
+                "description": "리스폰 데이터",
+                "properties": {
+                    "success": {
+                        "type": "boolean"
+                    }
+                },
+                "type": "object"
+            },
+            "ResponseError": {
+                "description": "리스폰 에러 객체",
+                "type": "object",
+                "example": {
+                    "success": false,
+                    "message": "유효성 검사에 실패했습니다.",
+                    "errors": {
+                        "username": [
+                            "username 값이 6 ~ 25 글자가 아닙니다."
+                        ]
+                    }
+                },
+                "allOf": [
+                    {
+                        "properties": {
+                            "message": {
+                                "type": "string"
+                            },
+                            "errors": {}
+                        }
+                    },
+                    {
+                        "$ref": "#/components/schemas/ResponseData"
+                    }
+                ]
+            },
+            "ResponseList": {
+                "description": "리스폰 리스트 객체",
+                "type": "object",
+                "allOf": [
+                    {
+                        "properties": {
+                            "results": {}
+                        }
+                    },
+                    {
+                        "$ref": "#/components/schemas/ResponseData"
+                    }
+                ]
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Login",
+            "description": "회원 가입 및 토큰 발급"
+        }
+    ],
+    "security": [
+        []
+    ]
+}

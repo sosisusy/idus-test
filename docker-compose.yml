@@ -20,17 +20,17 @@ services:
     volumes:
       - "./Docker/mysql/data:/var/lib/mysql"
     environment:
-      - MYSQL_DATABASE=idus
-      - MYSQL_ROOT_PASSWORD=test123
-      - MYSQL_USER=test
-      - MYSQL_PASSWORD=test123
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
     networks:
       - app
   nginx:
     image: nginx
     container_name: nginx
     ports:
-      - "8080:8080"
+      - "${APP_PORT}:80"
     volumes:
       - "./Docker/nginx/conf.d:/etc/nginx/conf.d"
       - "./Docker/nginx/nginx.conf:/etc/nginx/nginx.conf"

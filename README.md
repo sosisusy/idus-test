@@ -12,18 +12,8 @@ NGINX
 어플리케이션 구동 환경을 설정하기 위해서는 먼저 [도커](https://docs.docker.com/get-docker/)를 설치해주세요.
 
 ```zsh
-# 도커 환경 구동
-docker-compose up -d
-
-# PHP 패키지 설치
-docker-compose exec php-fpm composer install
-
-# 환경 파일 복사
-cp .env.example .env
-
-# 어플리케이션 키 생성
-docker-compose exec php-fpm php artisan key:generate
-
-# 테이블 생성
-docker-compose exec php-fpm php artisan migrate --seed
+sh ./setup.sh
 ```
+
+### 접속 확인
+<http://idus.test:8080>

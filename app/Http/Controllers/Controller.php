@@ -17,7 +17,7 @@ use Illuminate\Routing\Controller as BaseController;
  *      description="
  ## Request 인증
  - `/api/token` 엔드포인트에서 인증 토큰을 발급 받을 수 있습니다.
- - Request Header `Authorization` 필드 안에 `bearer <auth-token>` 형태로 인증 토큰을 기입 후 요청해주시면 됩니다.
+ - Request Header `Authorization` 필드 안에 `Bearer <access-token>` 형태로 인증 토큰을 기입 후 요청해주시면 됩니다.
 
  ## 유효성 검사 실패
  - Response Code: 400

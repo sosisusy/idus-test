@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "idus API",
-        "description": "\n ## Request 인증\n - `/api/token` 엔드포인트에서 인증 토큰을 발급 받을 수 있습니다.\n - Request Header `Authorization` 필드 안에 `Bearer <access-token>` 형태로 인증 토큰을 기입 후 요청해주시면 됩니다.\n\n ## 유효성 검사 실패\n - Response Code: 400\n - Response Body: `ResponseError`\n ```json\n {\n    'success': false,\n    'message': '유효성 검사에 실패했습니다.',\n    'errors': {\n        'username': [\n            '이미 존재하는 username 입니다.'\n        ]\n    }\n}\n ```\n",
+        "description": "\r\n ## Request 인증\r\n - `/api/token` 엔드포인트에서 인증 토큰을 발급 받을 수 있습니다.\r\n - Request Header `Authorization` 필드 안에 `Bearer <access-token>` 형태로 인증 토큰을 기입 후 요청해주시면 됩니다.\r\n\r\n ## 유효성 검사 실패\r\n - Response Code: 400\r\n - Response Body: `ResponseError`\r\n ```json\r\n {\r\n    'success': false,\r\n    'message': '유효성 검사에 실패했습니다.',\r\n    'errors': {\r\n        'username': [\r\n            '이미 존재하는 username 입니다.'\r\n        ]\r\n    }\r\n}\r\n ```\r\n",
         "version": "0.1"
     },
     "paths": {
@@ -133,6 +133,73 @@
                 ]
             }
         },
+        "/api/orders": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "주문 건 조회",
+                "description": "",
+                "operationId": "2cd7e03021e72d9d799c12dfe179c865",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "description": "페이지",
+                        "required": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "count",
+                        "in": "query",
+                        "description": "페이지 당 데이터 수량",
+                        "required": false,
+                        "allowEmptyValue": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "성공",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "allOf": [
+                                        {
+                                            "properties": {
+                                                "results": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/Order"
+                                                    }
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/ResponseList"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "accessToken": [
+                            ""
+                        ]
+                    }
+                ]
+            }
+        },
         "/api/me": {
             "get": {
                 "tags": [
@@ -219,7 +286,21 @@
                 "allOf": [
                     {
                         "properties": {
-                            "results": {}
+                            "totalCount": {
+                                "description": "전체 데이터 수량",
+                                "type": "integer"
+                            },
+                            "rowCount": {
+                                "description": "페이지 당 데이터 수량",
+                                "type": "integer"
+                            },
+                            "page": {
+                                "description": "페이지",
+                                "type": "integer"
+                            },
+                            "results": {
+                                "description": "결과 값"
+                            }
                         }
                     },
                     {
@@ -238,6 +319,55 @@
                     },
                     {
                         "$ref": "#/components/schemas/ResponseData"
+                    }
+                ]
+            },
+            "NewOrder": {
+                "description": "신규 주문 건",
+                "properties": {
+                    "user_id": {
+                        "description": "회원 고유 아이디",
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "order_number": {
+                        "description": "주문 번호",
+                        "type": "string",
+                        "example": "order1"
+                    },
+                    "product_name": {
+                        "description": "제품명",
+                        "type": "string",
+                        "example": "세탁기"
+                    },
+                    "payment_dt": {
+                        "description": "결제 일시",
+                        "type": "string",
+                        "format": "datetime",
+                        "example": "2021-11-26 12:00:00"
+                    }
+                },
+                "type": "object"
+            },
+            "OrderId": {
+                "description": "주문 건 고유 아이디",
+                "type": "integer",
+                "format": "int64",
+                "example": 1
+            },
+            "Order": {
+                "description": "주문 건 정보",
+                "allOf": [
+                    {
+                        "properties": {
+                            "id": {
+                                "$ref": "#/components/schemas/OrderId"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    {
+                        "$ref": "#/components/schemas/NewUser"
                     }
                 ]
             },
@@ -323,6 +453,10 @@
         {
             "name": "Login",
             "description": "회원 가입 및 토큰 발급"
+        },
+        {
+            "name": "Order",
+            "description": "주문"
         },
         {
             "name": "User",

@@ -26,7 +26,7 @@ class UserController extends Controller
      *      path="/api/users",
      *      tags={"User"},
      *      security={{"accessToken":{""}}},
-     *      description="",
+     *      description="`users:index` 권한 필요",
      *      @OA\Parameter(
      *          name="email",
      *          in="query",
@@ -106,7 +106,7 @@ class UserController extends Controller
      *      path="/api/users/{userId}",
      *      tags={"User"},
      *      security={{"accessToken":{""}}},
-     *      description="",
+     *      description="`users:index` 권한 필요",
      *      @OA\Parameter(
      *          name="userId",
      *          in="path",

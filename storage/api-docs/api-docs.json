@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "idus API",
-        "description": "\r\n ## Request 인증\r\n - `/api/token` 엔드포인트에서 인증 토큰을 발급 받을 수 있습니다.\r\n - Request Header `Authorization` 필드 안에 `Bearer <access-token>` 형태로 인증 토큰을 기입 후 요청해주시면 됩니다.\r\n\r\n ## 유효성 검사 실패\r\n - Response Code: 400\r\n - Response Body: `ResponseError`\r\n ```json\r\n {\r\n    'success': false,\r\n    'message': '유효성 검사에 실패했습니다.',\r\n    'errors': {\r\n        'username': [\r\n            '이미 존재하는 username 입니다.'\r\n        ]\r\n    }\r\n}\r\n ```\r\n",
+        "description": "\n ## Request 인증\n - `/api/token` 엔드포인트에서 인증 토큰을 발급 받을 수 있습니다.\n - Request Header `Authorization` 필드 안에 `Bearer <access-token>` 형태로 인증 토큰을 기입 후 요청해주시면 됩니다.\n\n ## 유효성 검사 실패\n - Response Code: 400\n - Response Body: `ResponseError`\n ```json\n {\n    'success': false,\n    'message': '유효성 검사에 실패했습니다.',\n    'errors': {\n        'username': [\n            '이미 존재하는 username 입니다.'\n        ]\n    }\n}\n ```\n",
         "version": "0.1"
     },
     "paths": {
@@ -138,7 +138,7 @@
                 "tags": [
                     "Order"
                 ],
-                "summary": "주문 건 조회",
+                "summary": "주문 목록 조회",
                 "description": "",
                 "operationId": "2cd7e03021e72d9d799c12dfe179c865",
                 "parameters": [
@@ -153,7 +153,7 @@
                         }
                     },
                     {
-                        "name": "count",
+                        "name": "per_page",
                         "in": "query",
                         "description": "페이지 당 데이터 수량",
                         "required": false,
@@ -286,17 +286,20 @@
                 "allOf": [
                     {
                         "properties": {
-                            "totalCount": {
+                            "total_count": {
                                 "description": "전체 데이터 수량",
-                                "type": "integer"
+                                "type": "integer",
+                                "example": 50
                             },
-                            "rowCount": {
+                            "per_page": {
                                 "description": "페이지 당 데이터 수량",
-                                "type": "integer"
+                                "type": "integer",
+                                "example": 20
                             },
                             "page": {
                                 "description": "페이지",
-                                "type": "integer"
+                                "type": "integer",
+                                "example": 1
                             },
                             "results": {
                                 "description": "결과 값"

@@ -8,6 +8,7 @@ use App\Classes\Response\ResponseObject;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Routing\Controller as BaseController;
 
 /**
@@ -41,6 +42,8 @@ class Controller extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     /**
+     * 단일 데이터 리스폰
+     *
      * @param   Model|array|object  $result
      * @param   int                 $statusCode
      */
@@ -50,15 +53,27 @@ class Controller extends BaseController
     }
 
     /**
-     * @param   Collection|array    $results
-     * @param   int                 $statusCode
+     * 목록형 데이터 리스폰
+     *
+     * @param   LengthAwarePaginator    $results
+     * @param   int                     $statusCode
      */
-    function responseList($results, $statusCode = 200)
+    function responseList(LengthAwarePaginator $results, $statusCode = 200)
     {
-        // return response()->json(ResponseList::new($results), $statusCode);
+        return response()->json(
+            ResponseList::new(
+                $results->currentPage(),
+                $results->perPage(),
+                $results->total(),
+                $results->items()
+            ),
+            $statusCode
+        );
     }
 
     /**
+     * 에러 리스폰
+     *
      * @param   string              $message
      * @param   array|MessageBag    $errors
      * @param   int                 $statusCode

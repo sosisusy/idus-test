@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Http\Requests\IssueUserAccessTokenRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

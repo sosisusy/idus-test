@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PageRequest;
+use App\Services\OrderService;
 use Illuminate\Http\Request;
 
 /**
@@ -9,8 +11,15 @@ use Illuminate\Http\Request;
  */
 class OrderController extends Controller
 {
+    protected OrderService $orderService;
+
+    function __construct(OrderService $orderService)
+    {
+        $this->orderService = $orderService;
+    }
+
     /**
-     * 주문 건 조회
+     * 주문 목록 조회
      *
      * @OA\Get(
      *      path="/api/orders",
@@ -26,7 +35,7 @@ class OrderController extends Controller
      *          @OA\Schema(type="integer")
      *      ),
      *      @OA\Parameter(
-     *          name="count",
+     *          name="per_page",
      *          in="query",
      *          required=false,
      *          allowEmptyValue=true,
@@ -49,14 +58,12 @@ class OrderController extends Controller
      *      ),
      * )
      */
-    public function index(Request $request)
+    public function index(PageRequest $request)
     {
-        // $page = $request->get("page", 1);
-        // $count = $request->get("count", 20);
-
+        $perPage = $request->get("per_page", 20);
         $user = $request->user();
-        $orders = $user->orders()->latest()->paginate(20);
+        $orders = $this->orderService->getOrders($user, $perPage);
 
-        // return $this->responseList($orders);
+        return $this->responseList($orders);
     }
 }

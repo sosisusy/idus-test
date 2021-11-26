@@ -16,19 +16,19 @@ class ResponseList extends ResponseData implements Arrayable
 {
 
     /**
-     * @OA\Property(description="전체 데이터 수량")
+     * @OA\Property(description="전체 데이터 수량", example=50)
      * @var int
      */
-    protected $totalCount;
+    protected $total_count;
 
     /**
-     * @OA\Property(description="페이지 당 데이터 수량")
+     * @OA\Property(description="페이지 당 데이터 수량", example=20)
      * @var int
      */
-    protected $rowCount;
+    protected $per_page;
 
     /**
-     * @OA\Property(description="페이지")
+     * @OA\Property(description="페이지", example=1)
      * @var int
      */
     protected $page;
@@ -41,16 +41,16 @@ class ResponseList extends ResponseData implements Arrayable
 
     /**
      * @param   int                 $page
-     * @param   int                 $rowCount
+     * @param   int                 $perPage
      * @param   int                 $totalCount
      * @param   Collection|array    $results
      */
-    function __construct(int $page, int $rowCount, int $totalCount, $results)
+    function __construct(int $page, int $perPage, int $totalCount, $results)
     {
         $this->success = true;
         $this->page = $page;
-        $this->rowCount = $rowCount;
-        $this->totalCount = $totalCount;
+        $this->per_page = $perPage;
+        $this->total_count = $totalCount;
         $this->results = $results;
 
         parent::__construct($this->toArray(), 400);
@@ -58,13 +58,13 @@ class ResponseList extends ResponseData implements Arrayable
 
     /**
      * @param   int                 $page
-     * @param   int                 $rowCount
+     * @param   int                 $perPage
      * @param   int                 $totalCount
      * @param   Collection|array    $results
      */
-    static function new(int $page, int $rowCount, int $totalCount, $results)
+    static function new(int $page, int $perPage, int $totalCount, $results)
     {
-        return new static($page, $rowCount, $totalCount, $results);
+        return new static($page, $perPage, $totalCount, $results);
     }
 
     function toArray()
@@ -72,8 +72,8 @@ class ResponseList extends ResponseData implements Arrayable
         return [
             "success" => $this->success,
             "page" => $this->page,
-            "rowCount" => $this->rowCount,
-            "totalCount" => $this->totalCount,
+            "per_page" => $this->per_page,
+            "total_count" => $this->total_count,
             "results" => $this->results,
         ];
     }

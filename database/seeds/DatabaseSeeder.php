@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
                 "phone_number" => "01012341234",
                 "email" => "test@test.com",
                 "gender" => "M",
+                "scope" => ["users:index"],
             ]
         );
 

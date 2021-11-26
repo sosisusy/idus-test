@@ -25,9 +25,12 @@ class CreateUsersTable extends Migration
             $table->string('phone_number', 20)->comment("연락처");
             $table->string('email', 100)->comment("이메일");
             $table->enum("gender", ["M", "F"])->nullable()->comment("성별 (M: 남, F: 여)");
+            $table->json("scope")->comment("라우트 권한");
             $table->timestamps();
 
             $table->unique("username");
+            $table->index("email");
+            $table->index("name");
         });
 
         DB::statement("ALTER TABLE users COMMENT '회원 테이블'");

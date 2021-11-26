@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\Rule;
 
 class PasswordRule implements Rule
 {
-    const PATTERN = "/^(?=^.*{10,}$)(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[#\&\+\-%@=\/\\\:;,\.'\"\^`~\_|\!\?\*$#<>()\[\]\{\}]).*$/";
+    const PATTERN = "/^(?=^.{10,100}$)(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[#\&\+\-%@=\/\\\:;,\.'\"\^`~\_|\!\?\*$#<>()\[\]\{\}]).*$/";
 
     /**
      * Create a new rule instance.

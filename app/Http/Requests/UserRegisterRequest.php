@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\User;
 use App\Rules\PasswordRule;
+use Illuminate\Validation\Validator;
 
 class UserRegisterRequest extends BaseRequest
 {
@@ -29,9 +31,18 @@ class UserRegisterRequest extends BaseRequest
             "nickname" => "required|regex:/^[a-z]+$/|between:3,30",
             "password" => ["required", new PasswordRule],
             "phone_number" => "required|regex:/^\d+$/|between:9,20",
-            "email" => "required|email",
+            "email" => "required|email|max:100",
             "gender" => "nullable|in:M,F",
         ];
+    }
+
+    function withValidator(Validator $validator)
+    {
+        $validator->after(function (Validator $validator) {
+            if (!is_null(User::where("username", $this->get("username"))->first())) {
+                $validator->errors()->add("username", "이미 존재하는 username 입니다.");
+            }
+        });
     }
 
     function messages()

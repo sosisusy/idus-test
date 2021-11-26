@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Classes\Response\ResponseError;
+use App\Classes\Response\ResponseList;
+use App\Classes\Response\ResponseObject;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -21,4 +24,29 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    /**
+     * @param   Model|array|object  $result
+     */
+    function responseObject($result)
+    {
+        return response()->json(ResponseObject::new($result));
+    }
+
+    /**
+     * @param   Collection|array    $results
+     */
+    function responseList($results)
+    {
+        return response()->json(ResponseList::new($results));
+    }
+
+    /**
+     * @param   string              $message
+     * @param   array|MessageBag    $errors
+     */
+    function responseError(string $message, $errors)
+    {
+        return response()->json(ResponseError::new($message, $errors));
+    }
 }

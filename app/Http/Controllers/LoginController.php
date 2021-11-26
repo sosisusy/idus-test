@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRegisterRequest;
+use App\Services\UserService;
 
 /**
  * 로그인 컨트롤러
@@ -14,6 +15,13 @@ use App\Http\Requests\UserRegisterRequest;
  */
 class LoginController extends Controller
 {
+    protected UserService $userService;
+
+    function __construct(UserService $userService)
+    {
+        $this->userService = $userService;
+    }
+
     /**
      * 회원 가입
      *
@@ -21,13 +29,20 @@ class LoginController extends Controller
      *      path="/api/register",
      *      tags={"Login"},
      *      description="",
+     *      @OA\RequestBody(
+     *          required=true,
+     *          @OA\JsonContent(
+     *              type="object",
+     *              ref="#/components/schemas/NewUser",
+     *          ),
+     *      ),
      *      @OA\Response(
      *          response=200,
      *          description="성공",
      *          @OA\JsonContent(
      *              type="object",
      *              allOf={
-     *                  @OA\Schema(ref="#/components/schemas/ResponseError")
+     *                  @OA\Schema(ref="#/components/schemas/User")
      *              }
      *          )
      *      ),
@@ -45,5 +60,8 @@ class LoginController extends Controller
      */
     function register(UserRegisterRequest $request)
     {
+        $user = $this->userService->create($request);
+
+        return $this->responseObject($user);
     }
 }

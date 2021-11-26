@@ -14,6 +14,16 @@
                 "summary": "회원 가입",
                 "description": "",
                 "operationId": "a39949df013c1eb78ff8bd8f481d408a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/NewUser"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "성공",
@@ -23,7 +33,7 @@
                                     "type": "object",
                                     "allOf": [
                                         {
-                                            "$ref": "#/components/schemas/ResponseError"
+                                            "$ref": "#/components/schemas/User"
                                         }
                                     ]
                                 }
@@ -97,6 +107,69 @@
                     },
                     {
                         "$ref": "#/components/schemas/ResponseData"
+                    }
+                ]
+            },
+            "ResponseObject": {
+                "description": "리스폰 단일 객체",
+                "type": "object",
+                "allOf": [
+                    {
+                        "properties": {
+                            "result": {}
+                        }
+                    },
+                    {
+                        "$ref": "#/components/schemas/ResponseData"
+                    }
+                ]
+            },
+            "NewUser": {
+                "properties": {
+                    "username": {
+                        "type": "string",
+                        "example": "testuser"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "홍길동"
+                    },
+                    "nickname": {
+                        "type": "string",
+                        "example": "laraveluser"
+                    },
+                    "phone_number": {
+                        "type": "string",
+                        "example": "01011112222"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "test@example.com"
+                    },
+                    "gender": {
+                        "type": "string",
+                        "example": "M"
+                    }
+                },
+                "type": "object"
+            },
+            "UserId": {
+                "type": "integer",
+                "format": "int64",
+                "example": 1
+            },
+            "User": {
+                "allOf": [
+                    {
+                        "properties": {
+                            "id": {
+                                "$ref": "#/components/schemas/UserId"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    {
+                        "$ref": "#/components/schemas/NewUser"
                     }
                 ]
             }

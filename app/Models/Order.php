@@ -53,7 +53,7 @@ class Order extends Model
  *      schema="Order",
  *      description="주문 건 정보",
  *      allOf={
- *          @OA\Schema(ref="#/components/schemas/NewUser"),
+ *          @OA\Schema(ref="#/components/schemas/NewOrder"),
  *          @OA\Schema(
  *              type="object",
  *              @OA\Property(property="id", ref="#/components/schemas/OrderId")

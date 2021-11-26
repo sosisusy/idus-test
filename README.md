@@ -21,7 +21,9 @@ id: test
 pw: test123
 
 ### 접속 확인
-<http://idus.test:8080>
+<http://localhost:8080>  
+<http://idus.test:8080>  
 
 ### API Documentation
-<http://idus.test:8080/api/docs>
+<http://localhost:8080/api/docs>  
+<http://idus.test:8080/api/docs>  

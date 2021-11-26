@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "idus API",
-        "description": "\n ## Request 인증\n - `/api/token` 엔드포인트에서 인증 토큰을 발급 받을 수 있습니다.\n - Request Header `Authorization` 필드 안에 `bearer <auth-token>` 형태로 인증 토큰을 기입 후 요청해주시면 됩니다.\n\n ## 유효성 검사 실패\n - Response Code: 400\n - Response Body: `ResponseError`\n ```json\n {\n    'success': false,\n    'message': '유효성 검사에 실패했습니다.',\n    'errors': {\n        'username': [\n            '이미 존재하는 username 입니다.'\n        ]\n    }\n}\n ```\n",
+        "description": "\n ## Request 인증\n - `/api/token` 엔드포인트에서 인증 토큰을 발급 받을 수 있습니다.\n - Request Header `Authorization` 필드 안에 `Bearer <access-token>` 형태로 인증 토큰을 기입 후 요청해주시면 됩니다.\n\n ## 유효성 검사 실패\n - Response Code: 400\n - Response Body: `ResponseError`\n ```json\n {\n    'success': false,\n    'message': '유효성 검사에 실패했습니다.',\n    'errors': {\n        'username': [\n            '이미 존재하는 username 입니다.'\n        ]\n    }\n}\n ```\n",
         "version": "0.1"
     },
     "paths": {

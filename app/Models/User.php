@@ -65,6 +65,14 @@ class User extends Authenticatable
      */
     protected $gender;
 
+    /**
+     * 주문 건 목록
+     */
+    function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
     function setPasswordAttribute($value)
     {
         $this->attributes["password"] = Hash::make($value);
@@ -83,7 +91,7 @@ class User extends Authenticatable
  *          @OA\Schema(ref="#/components/schemas/NewUser"),
  *          @OA\Schema(
  *              type="object",
- *              @OA\Property(property="id", ref="#/components/schemas/UserId")
+ *              @OA\Property(property="id", ref="#/components/schemas/UserId"),
  *          )
  *      },
  *      not={"password"}

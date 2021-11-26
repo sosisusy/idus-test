@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -12,7 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::updateOrCreate(
+        $user = User::updateOrCreate(
             [
                 "username" => "test",
             ],
@@ -25,5 +26,7 @@ class DatabaseSeeder extends Seeder
                 "gender" => "M",
             ]
         );
+
+        $user->orders()->saveMany(factory(Order::class, 10)->make());
     }
 }

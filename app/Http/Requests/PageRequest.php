@@ -38,7 +38,7 @@ class PageRequest extends BaseRequest
     /**
      * 목록 페이지 룰
      */
-    function pageRules(): array
+    final function pageRules(): array
     {
         return [
             "page" => "nullable|numeric|min:1",

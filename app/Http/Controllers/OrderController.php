@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PageRequest;
 use App\Services\OrderService;
-use Illuminate\Http\Request;
 
 /**
  * @OA\Tag(name="Order", description="주문")

@@ -17,20 +17,25 @@ use Illuminate\Support\Facades\Route;
 */
 
 // 회원 가입
-Route::post('register', [LoginController::class, "register"])->name("user.register");
+Route::post('register', [LoginController::class, "register"])->name("register");
 
 // 토큰 발급 (login)
-Route::post("token", [LoginController::class, "issueToken"])->name("user.token.issue");
+Route::post("token", [LoginController::class, "issueToken"])->name("token.issue");
 
-
+/**
+ * 회원 권한
+ */
 Route::group(["middleware" => ["auth:sanctum"]], function () {
 
     // 토큰 폐기 (logout)
-    Route::get("token/dispose", [LoginController::class, "disposeToken"])->name("user.token.dispose");
+    Route::get("token/dispose", [LoginController::class, "disposeToken"])->name("token.dispose");
 
     // 사용자 정보
-    Route::get("me", [UserController::class, "me"]);
+    Route::get("me", [UserController::class, "me"])->name("me");
 
-    // 주문 건 조회
-    Route::get("orders", [OrderController::class, "index"]);
+    // 회원 목록 조회
+    Route::get("users", [UserController::class, "index"])->name("users");
+
+    // 주문 목록 조회
+    Route::get("orders", [OrderController::class, "index"])->name("orders");
 });

@@ -21,7 +21,9 @@ class User extends Authenticatable
         "updated_at",
     ];
 
-    protected $casts = [];
+    protected $casts = [
+        "scope" => "array",
+    ];
 
     /**
      * @OA\Property(description="로그인 네임", example="testuser")
@@ -78,9 +80,12 @@ class User extends Authenticatable
      */
     function lastOrder()
     {
-        return $this->orders()->latest()->first();
+        return $this->hasOne(Order::class)->latest();
     }
 
+    /**
+     * 패스워드 설정
+     */
     function setPasswordAttribute($value)
     {
         $this->attributes["password"] = Hash::make($value);

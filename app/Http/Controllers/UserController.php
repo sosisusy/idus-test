@@ -141,9 +141,9 @@ class UserController extends Controller
      */
     function show(Request $request, User $user)
     {
-        $user = $request->user();
+        $requestUser = $request->user();
 
-        if (!$user->tokenCan("users:index")) abort(403);
+        if (!$requestUser->tokenCan("users:index")) abort(403);
 
         return $this->responseObject($user->load("lastOrder"));
     }

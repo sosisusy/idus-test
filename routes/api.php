@@ -36,6 +36,9 @@ Route::group(["middleware" => ["auth:sanctum"]], function () {
     // 회원 목록 조회
     Route::get("users", [UserController::class, "index"])->name("users");
 
+    // 단일 회원 상세 조회
+    Route::get("users/{user}", [UserController::class, "show"])->where("user", "\d+")->name("users.show");
+
     // 주문 목록 조회
     Route::get("orders", [OrderController::class, "index"])->name("orders");
 });

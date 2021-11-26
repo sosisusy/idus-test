@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserListRequest;
+use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Http\Request;
 
@@ -96,6 +97,55 @@ class UserController extends Controller
         ]);
 
         return $this->responseList($users);
+    }
+
+    /**
+     * 단일 회원 상세 조회
+     *
+     * @OA\Get(
+     *      path="/api/users/{userId}",
+     *      tags={"User"},
+     *      security={{"accessToken":{""}}},
+     *      description="",
+     *      @OA\Parameter(
+     *          name="userId",
+     *          in="path",
+     *          required=true,
+     *          description="회원 고유 아이디",
+     *          @OA\Schema(type="integer", example=1)
+     *      ),
+     *      @OA\Response(
+     *          response=200,
+     *          description="성공",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              allOf={
+     *                  @OA\Schema(ref="#/components/schemas/ResponseObject"),
+     *                  @OA\Schema(
+     *                      type="object",
+     *                      @OA\Property(
+     *                          property="result",
+     *                          allOf={
+     *                              @OA\Schema(ref="#/components/schemas/User"),
+     *                              @OA\Schema(
+     *                                  type="object",
+     *                                  @OA\Property(property="last_order", ref="#/components/schemas/Order")
+     *                              )
+     *                          }
+     *                      )
+     *                  ),
+     *              }
+     *          )
+     *      ),
+     * )
+     */
+    function show(Request $request, User $user)
+    {
+        $user = $request->user();
+
+        if (!$user->tokenCan("users:index")) abort(403);
+
+        return $this->responseObject($user->load("lastOrder"));
     }
 
     /**

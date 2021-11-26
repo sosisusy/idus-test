@@ -300,6 +300,72 @@
                 ]
             }
         },
+        "/api/users/{userId}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "단일 회원 상세 조회",
+                "description": "",
+                "operationId": "2fc03ba6d92e0712966a5ce4a7d9eaeb",
+                "parameters": [
+                    {
+                        "name": "userId",
+                        "in": "path",
+                        "description": "회원 고유 아이디",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "성공",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "allOf": [
+                                        {
+                                            "properties": {
+                                                "result": {
+                                                    "allOf": [
+                                                        {
+                                                            "properties": {
+                                                                "last_order": {
+                                                                    "$ref": "#/components/schemas/Order"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        {
+                                                            "$ref": "#/components/schemas/User"
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/ResponseObject"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "accessToken": [
+                            ""
+                        ]
+                    }
+                ]
+            }
+        },
         "/api/me": {
             "get": {
                 "tags": [

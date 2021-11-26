@@ -17,3 +17,6 @@ sh ./setup.sh
 
 ### 접속 확인
 <http://idus.test:8080>
+
+### API Documentation
+<http://idus.test:8080/api/docs>

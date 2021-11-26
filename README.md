@@ -23,7 +23,7 @@ Windows:
 ```
 
 ### 테스트 회원
-`/api/users` API 요청 권한은 테스트 회원에게만 주어집니다.  
+`/api/users`, `/api/users/{userId}` API 요청 권한은 테스트 회원에게만 주어집니다.  
 id: test  
 pw: test123
 

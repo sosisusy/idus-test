@@ -29,7 +29,7 @@ class ResponseObject extends ResponseData implements Arrayable
         $this->success = true;
         $this->result = $result;
 
-        parent::__construct($this->toArray(), 400);
+        parent::__construct($this->toArray(), 200);
     }
 
     /**

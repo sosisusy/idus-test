@@ -53,7 +53,7 @@ class ResponseList extends ResponseData implements Arrayable
         $this->total_count = $totalCount;
         $this->results = $results;
 
-        parent::__construct($this->toArray(), 400);
+        parent::__construct($this->toArray(), 200);
     }
 
     /**

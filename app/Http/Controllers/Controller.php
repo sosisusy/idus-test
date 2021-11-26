@@ -48,29 +48,24 @@ class Controller extends BaseController
      * 단일 데이터 리스폰
      *
      * @param   Model|array|object  $result
-     * @param   int                 $statusCode
      */
-    function responseObject($result, $statusCode = 200)
+    function responseObject($result)
     {
-        return response()->json(ResponseObject::new($result), $statusCode);
+        return ResponseObject::new($result);
     }
 
     /**
      * 목록형 데이터 리스폰
      *
      * @param   LengthAwarePaginator    $results
-     * @param   int                     $statusCode
      */
-    function responseList(LengthAwarePaginator $results, $statusCode = 200)
+    function responseList(LengthAwarePaginator $results)
     {
-        return response()->json(
-            ResponseList::new(
-                $results->currentPage(),
-                $results->perPage(),
-                $results->total(),
-                $results->items()
-            ),
-            $statusCode
+        return ResponseList::new(
+            $results->currentPage(),
+            $results->perPage(),
+            $results->total(),
+            $results->items()
         );
     }
 
@@ -79,10 +74,9 @@ class Controller extends BaseController
      *
      * @param   string              $message
      * @param   array|MessageBag    $errors
-     * @param   int                 $statusCode
      */
-    function responseError(string $message, $errors, $statusCode = 400)
+    function responseError(string $message, $errors)
     {
-        return response()->json(ResponseError::new($message, $errors), $statusCode);
+        return ResponseError::new($message, $errors);
     }
 }

@@ -33,7 +33,15 @@
                                     "type": "object",
                                     "allOf": [
                                         {
-                                            "$ref": "#/components/schemas/User"
+                                            "properties": {
+                                                "result": {
+                                                    "$ref": "#/components/schemas/User"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/ResponseObject"
                                         }
                                     ]
                                 }
@@ -48,9 +56,9 @@
                 "tags": [
                     "Login"
                 ],
-                "summary": "토큰 발급",
+                "summary": "토큰 발급 (로그인)",
                 "description": "",
-                "operationId": "46986b9904b82938eb2d7656c737fc43",
+                "operationId": "22fba526ec3585562464fda5bbc633e8",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -101,6 +109,70 @@
                         }
                     }
                 }
+            }
+        },
+        "/api/token/dispose": {
+            "get": {
+                "tags": [
+                    "Login"
+                ],
+                "summary": "토큰 폐기 (로그아웃)",
+                "description": "",
+                "operationId": "eff6eb4dc901676b23c6ce0c74fc20a3",
+                "responses": {
+                    "204": {
+                        "description": "No Content"
+                    }
+                },
+                "security": [
+                    {
+                        "accessToken": [
+                            ""
+                        ]
+                    }
+                ]
+            }
+        },
+        "/api/me": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "사용자 정보 조회",
+                "description": "",
+                "operationId": "aef6fdddec1e8495d4830821b4afdf54",
+                "responses": {
+                    "200": {
+                        "description": "성공",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "allOf": [
+                                        {
+                                            "properties": {
+                                                "result": {
+                                                    "$ref": "#/components/schemas/User"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/ResponseObject"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "accessToken": [
+                            ""
+                        ]
+                    }
+                ]
             }
         }
     },
@@ -239,12 +311,22 @@
                     "password"
                 ]
             }
+        },
+        "securitySchemes": {
+            "accessToken": {
+                "type": "http",
+                "scheme": "bearer"
+            }
         }
     },
     "tags": [
         {
             "name": "Login",
             "description": "회원 가입 및 토큰 발급"
+        },
+        {
+            "name": "User",
+            "description": "회원"
         }
     ],
     "security": [

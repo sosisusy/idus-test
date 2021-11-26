@@ -42,26 +42,29 @@ class Controller extends BaseController
 
     /**
      * @param   Model|array|object  $result
+     * @param   int                 $statusCode
      */
-    function responseObject($result)
+    function responseObject($result, $statusCode = 200)
     {
-        return response()->json(ResponseObject::new($result));
+        return response()->json(ResponseObject::new($result), $statusCode);
     }
 
     /**
      * @param   Collection|array    $results
+     * @param   int                 $statusCode
      */
-    function responseList($results)
+    function responseList($results, $statusCode = 200)
     {
-        return response()->json(ResponseList::new($results));
+        return response()->json(ResponseList::new($results), $statusCode);
     }
 
     /**
      * @param   string              $message
      * @param   array|MessageBag    $errors
+     * @param   int                 $statusCode
      */
-    function responseError(string $message, $errors)
+    function responseError(string $message, $errors, $statusCode = 400)
     {
-        return response()->json(ResponseError::new($message, $errors));
+        return response()->json(ResponseError::new($message, $errors), $statusCode);
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Requests\IssueUserAccessTokenRequest;
 use App\Http\Requests\UserRegisterRequest;
 use App\Models\User;
 use App\Services\UserService;
+use Illuminate\Http\Request;
 
 /**
  * 로그인 컨트롤러
@@ -44,7 +45,11 @@ class LoginController extends Controller
      *          @OA\JsonContent(
      *              type="object",
      *              allOf={
-     *                  @OA\Schema(ref="#/components/schemas/User")
+     *                  @OA\Schema(ref="#/components/schemas/ResponseObject"),
+     *                  @OA\Schema(
+     *                      type="object",
+     *                      @OA\Property(property="result", ref="#/components/schemas/User")
+     *                  ),
      *              }
      *          )
      *      ),
@@ -58,7 +63,7 @@ class LoginController extends Controller
     }
 
     /**
-     * 토큰 발급
+     * 토큰 발급 (로그인)
      *
      * @OA\Post(
      *      path="/api/token",
@@ -92,7 +97,7 @@ class LoginController extends Controller
      *      ),
      * )
      */
-    function token(IssueUserAccessTokenRequest $request)
+    function issueToken(IssueUserAccessTokenRequest $request)
     {
         $user = User::where("username", $request->get("username"))->first();
         $token = $this->userService->issueAccessToken("user access token", $user);
@@ -100,5 +105,27 @@ class LoginController extends Controller
         return $this->responseObject([
             "access_token" => $token->plainTextToken,
         ]);
+    }
+
+    /**
+     * 토큰 폐기 (로그아웃)
+     *
+     * @OA\Get(
+     *      path="/api/token/dispose",
+     *      tags={"Login"},
+     *      security={{"accessToken":{""}}},
+     *      description="",
+     *      @OA\Response(
+     *          response=204,
+     *          description="No Content",
+     *      ),
+     * )
+     */
+    function disposeToken(Request $request)
+    {
+        $user = $request->user();
+        $this->userService->disposeAccessToken($user);
+
+        return response("", 204);
     }
 }

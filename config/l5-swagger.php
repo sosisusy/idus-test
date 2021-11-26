@@ -147,6 +147,12 @@ return [
         */
         'securityDefinitions' => [
             'securitySchemes' => [
+
+                "accessToken" => [
+                    "type" => "http",
+                    "scheme" => "bearer",
+                ],
+
                 /*
                  * Examples of Security schemes
                 */
@@ -185,7 +191,8 @@ return [
                         ],
                     ],
                 ],
-                */],
+                */
+            ],
             'security' => [
                 /*
                  * Examples of Securities

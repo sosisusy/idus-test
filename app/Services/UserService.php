@@ -27,4 +27,12 @@ class UserService extends Service
     {
         return $user->createToken($token_name);
     }
+
+    /**
+     * 토큰 삭제
+     */
+    function disposeAccessToken(User $user)
+    {
+        $user->tokens()->delete();
+    }
 }

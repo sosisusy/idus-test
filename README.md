@@ -10,7 +10,6 @@ NGINX
 
 ### 환경 세팅
 어플리케이션 구동 환경을 설정하기 위해서는 먼저 [도커](https://docs.docker.com/get-docker/)를 설치해주세요.  
-어플리케이션 구동 기본 환경은 로컬의 `8080`포트로 설정이 되어있습니다. 포트를 변경하고자 한다면 `.env` 파일 안의 `APP_PORT`를 수정해주시면 됩니다.
   
 Mac or Linux:
 ```zsh
@@ -21,6 +20,12 @@ Windows:
 ```zsh
 ./setup.bat
 ```
+
+어플리케이션 구동 기본 환경은 로컬의 `8080`포트로 설정이 되어있습니다.  
+포트를 변경하고자 한다면 `.env` 파일 안의 `APP_PORT`를 수정 후 다음의 명령어를 실행하시면 됩니다.
+```zsh
+docker-compose restart nginx
+```  
 
 ### 테스트 회원
 `/api/users`, `/api/users/{userId}` API 요청 권한은 테스트 회원에게만 주어집니다.  

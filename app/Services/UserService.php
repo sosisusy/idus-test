@@ -21,7 +21,7 @@ class UserService extends Service
      */
     function getUsers(int $perPage, array $likes = []): LengthAwarePaginator
     {
-        $query = User::query();
+        $query = User::with(["lastOrder"]);
 
         if (!empty($likes["email"])) $query->where("email", "like", "{$likes["email"]}%");
         if (!empty($likes["name"])) $query->where("name", "like", "{$likes["name"]}%");

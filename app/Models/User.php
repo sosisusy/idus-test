@@ -27,37 +27,43 @@ class User extends Authenticatable
      * @OA\Property(example="testuser")
      * @var string
      */
-    public $username;
+    protected $username;
 
     /**
      * @OA\Property(example="홍길동")
      * @var string
      */
-    public $name;
+    protected $name;
+
+    /**
+     * @OA\Property(example="qdw12312A3!3")
+     * @var string
+     */
+    protected $password;
 
     /**
      * @OA\Property(example="laraveluser")
      * @var string
      */
-    public $nickname;
+    protected $nickname;
 
     /**
      * @OA\Property(example="01011112222")
      * @var string
      */
-    public $phone_number;
+    protected $phone_number;
 
     /**
      * @OA\Property(example="test@example.com")
      * @var string
      */
-    public $email;
+    protected $email;
 
     /**
      * @OA\Property(example="M")
      * @var string
      */
-    public $gender;
+    protected $gender;
 
     function setPasswordAttribute($value)
     {
@@ -78,6 +84,7 @@ class User extends Authenticatable
  *              type="object",
  *              @OA\Property(property="id", ref="#/components/schemas/UserId")
  *          )
- *      }
+ *      },
+ *      not={"password"}
  * )
  */

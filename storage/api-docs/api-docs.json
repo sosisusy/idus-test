@@ -134,6 +134,10 @@
                         "type": "string",
                         "example": "홍길동"
                     },
+                    "password": {
+                        "type": "string",
+                        "example": "qdw12312A3!3"
+                    },
                     "nickname": {
                         "type": "string",
                         "example": "laraveluser"
@@ -171,6 +175,9 @@
                     {
                         "$ref": "#/components/schemas/NewUser"
                     }
+                ],
+                "not": [
+                    "password"
                 ]
             }
         }

@@ -9,10 +9,14 @@ use Faker\Generator as Faker;
 $factory->define(Order::class, function (Faker $faker) {
     $products = ["선풍기", "세탁기", "에어컨", "TV"];
 
+    $paymentDt = $faker->dateTime();
+    $createdAt = $faker->dateTime($paymentDt);
     return [
         "user_id" => 1,
         "order_number" => strtoupper(Str::random(12)),
         "product_name" => $products[rand(0, 3)],
-        "payment_dt" => $faker->dateTime(),
+        "payment_dt" => $paymentDt,
+        "updated_at" => $createdAt,
+        "created_at" => $createdAt,
     ];
 });

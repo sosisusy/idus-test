@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\HasApiTokens;
 
 /**
- * @OA\Schema(schema="NewUser")
+ * @OA\Schema(schema="NewUser", description="신규 유저")
  */
 class User extends Authenticatable
 {
@@ -24,43 +24,43 @@ class User extends Authenticatable
     protected $casts = [];
 
     /**
-     * @OA\Property(example="testuser")
+     * @OA\Property(description="로그인 네임", example="testuser")
      * @var string
      */
     protected $username;
 
     /**
-     * @OA\Property(example="홍길동")
+     * @OA\Property(description="회원명", example="홍길동")
      * @var string
      */
     protected $name;
 
     /**
-     * @OA\Property(example="qdw12312A3!3")
+     * @OA\Property(description="패스워드", example="qdw12312A3!3")
      * @var string
      */
     protected $password;
 
     /**
-     * @OA\Property(example="laraveluser")
+     * @OA\Property(description="별칭", example="laraveluser")
      * @var string
      */
     protected $nickname;
 
     /**
-     * @OA\Property(example="01011112222")
+     * @OA\Property(description="전화 번호", example="01011112222")
      * @var string
      */
     protected $phone_number;
 
     /**
-     * @OA\Property(example="test@example.com")
+     * @OA\Property(description="이메일", example="test@example.com")
      * @var string
      */
     protected $email;
 
     /**
-     * @OA\Property(example="M")
+     * @OA\Property(description="성별<br>`M`: 남성, `F`: 여성", enum={"M", "F"}, example="M")
      * @var string
      */
     protected $gender;
@@ -72,12 +72,13 @@ class User extends Authenticatable
 }
 
 /**
- * @OA\Schema(schema="UserId", type="integer", format="int64", example=1)
+ * @OA\Schema(schema="UserId", description="회원 고유 아이디", type="integer", format="int64", example=1)
  */
 
 /**
  * @OA\Schema(
  *      schema="User",
+ *      description="회원 정보",
  *      allOf={
  *          @OA\Schema(ref="#/components/schemas/NewUser"),
  *          @OA\Schema(

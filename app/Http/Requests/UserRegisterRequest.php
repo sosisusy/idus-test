@@ -6,6 +6,9 @@ use App\Models\User;
 use App\Rules\PasswordRule;
 use Illuminate\Validation\Validator;
 
+/**
+ * 회원 등록
+ */
 class UserRegisterRequest extends BaseRequest
 {
     /**
@@ -52,18 +55,6 @@ class UserRegisterRequest extends BaseRequest
             "nickname.regex" => ":attribute는 소문자만 입력 가능합니다.",
             "phone_number.regex" => ":attribute는 숫자만 입력 할 수 있습니다.",
             "gender.in" => ":attribute의 값은 M, F 만 입력 할 수 있습니다.",
-        ];
-    }
-
-    function attributes()
-    {
-        return [
-            "name" => "이름",
-            "nickname" => "별칭",
-            "password" => "패스워드",
-            "phone_number" => "전화번호",
-            "email" => "이메일",
-            "gender" => "성별",
         ];
     }
 }

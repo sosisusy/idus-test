@@ -2,7 +2,7 @@
     "openapi": "3.0.0",
     "info": {
         "title": "idus API",
-        "description": "\n Request 인증\n - `/api/token` 엔드포인트에서 인증 토큰을 발급 받을 수 있습니다.\n - Request Header `Authorization` 필드 안에 `bearer <auth-token>` 형태로 인증 토큰을 기입 후 요청해주시면 됩니다.\n",
+        "description": "\n ## Request 인증\n - `/api/token` 엔드포인트에서 인증 토큰을 발급 받을 수 있습니다.\n - Request Header `Authorization` 필드 안에 `bearer <auth-token>` 형태로 인증 토큰을 기입 후 요청해주시면 됩니다.\n\n ## 유효성 검사 실패\n - Response Code: 400\n - Response Body: `ResponseError`\n ```json\n {\n    'success': false,\n    'message': '유효성 검사에 실패했습니다.',\n    'errors': {\n        'username': [\n            '이미 존재하는 username 입니다.'\n        ]\n    }\n}\n ```\n",
         "version": "0.1"
     },
     "paths": {
@@ -39,16 +39,61 @@
                                 }
                             }
                         }
-                    },
-                    "400": {
-                        "description": "유효성 검사 실패",
+                    }
+                }
+            }
+        },
+        "/api/token": {
+            "post": {
+                "tags": [
+                    "Login"
+                ],
+                "summary": "토큰 발급",
+                "description": "",
+                "operationId": "46986b9904b82938eb2d7656c737fc43",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "username": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "format": "password"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "성공",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "type": "object",
                                     "allOf": [
                                         {
-                                            "$ref": "#/components/schemas/ResponseError"
+                                            "properties": {
+                                                "result": {
+                                                    "properties": {
+                                                        "access_token": {
+                                                            "description": "API 접근 토큰",
+                                                            "example": "1|s3AnvYQ4k4F56JgjNvq163DTDB4csAoDRDknqp8E"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/ResponseObject"
                                         }
                                     ]
                                 }
@@ -125,44 +170,58 @@
                 ]
             },
             "NewUser": {
+                "description": "신규 유저",
                 "properties": {
                     "username": {
+                        "description": "로그인 네임",
                         "type": "string",
                         "example": "testuser"
                     },
                     "name": {
+                        "description": "회원명",
                         "type": "string",
                         "example": "홍길동"
                     },
                     "password": {
+                        "description": "패스워드",
                         "type": "string",
                         "example": "qdw12312A3!3"
                     },
                     "nickname": {
+                        "description": "별칭",
                         "type": "string",
                         "example": "laraveluser"
                     },
                     "phone_number": {
+                        "description": "전화 번호",
                         "type": "string",
                         "example": "01011112222"
                     },
                     "email": {
+                        "description": "이메일",
                         "type": "string",
                         "example": "test@example.com"
                     },
                     "gender": {
+                        "description": "성별<br>`M`: 남성, `F`: 여성",
                         "type": "string",
+                        "enum": [
+                            "M",
+                            "F"
+                        ],
                         "example": "M"
                     }
                 },
                 "type": "object"
             },
             "UserId": {
+                "description": "회원 고유 아이디",
                 "type": "integer",
                 "format": "int64",
                 "example": 1
             },
             "User": {
+                "description": "회원 정보",
                 "allOf": [
                     {
                         "properties": {

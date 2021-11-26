@@ -114,5 +114,12 @@ return [
     | of "email". This simply helps us make messages a little cleaner.
     |
     */
-    'attributes' => [],
+    'attributes' => [
+        "name" => "이름",
+        "nickname" => "별칭",
+        "password" => "패스워드",
+        "phone_number" => "전화번호",
+        "email" => "이메일",
+        "gender" => "성별",
+    ],
 ];

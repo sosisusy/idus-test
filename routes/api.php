@@ -16,3 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 // 회원 가입
 Route::post('register', [LoginController::class, "register"]);
+
+// 토큰 발급
+Route::post("token", [LoginController::class, "token"]);

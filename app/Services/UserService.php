@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Requests\IssueUserAccessTokenRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,5 +18,13 @@ class UserService extends Service
         return DB::transaction(function () use ($request) {
             return User::create($request->all());
         }, 3);
+    }
+
+    /**
+     * API 접근 토큰 발급
+     */
+    function issueAccessToken(string $token_name, User $user)
+    {
+        return $user->createToken($token_name);
     }
 }

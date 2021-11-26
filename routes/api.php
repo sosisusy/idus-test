@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,4 +30,7 @@ Route::group(["middleware" => ["auth:sanctum"]], function () {
 
     // 사용자 정보
     Route::get("me", [UserController::class, "me"]);
+
+    // 주문 건 조회
+    Route::get("orders", [OrderController::class, "index"]);
 });

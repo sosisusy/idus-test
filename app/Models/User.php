@@ -73,6 +73,14 @@ class User extends Authenticatable
         return $this->hasMany(Order::class);
     }
 
+    /**
+     * 마지막 주문 건
+     */
+    function lastOrder()
+    {
+        return $this->orders()->latest()->first();
+    }
+
     function setPasswordAttribute($value)
     {
         $this->attributes["password"] = Hash::make($value);

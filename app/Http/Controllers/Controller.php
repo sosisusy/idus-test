@@ -55,7 +55,7 @@ class Controller extends BaseController
      */
     function responseList($results, $statusCode = 200)
     {
-        return response()->json(ResponseList::new($results), $statusCode);
+        // return response()->json(ResponseList::new($results), $statusCode);
     }
 
     /**

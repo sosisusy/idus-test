@@ -2,6 +2,7 @@
 
 namespace App\Classes\Response;
 
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Http\JsonResponse;
 
@@ -12,7 +13,7 @@ use Illuminate\Http\JsonResponse;
  *      type="object",
  * )
  */
-abstract class ResponseData extends JsonResponse implements Jsonable
+abstract class ResponseData extends JsonResponse implements Jsonable, Arrayable
 {
     /**
      * @OA\Property()

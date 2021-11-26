@@ -21,7 +21,7 @@ use Illuminate\Contracts\Support\MessageBag;
  *      },
  * )
  */
-class ResponseError extends ResponseData implements Arrayable
+class ResponseError extends ResponseData
 {
 
     /**

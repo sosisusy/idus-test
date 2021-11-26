@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  *      type="object",
  * )
  */
-class ResponseObject extends ResponseData implements Arrayable
+class ResponseObject extends ResponseData
 {
 
     /**

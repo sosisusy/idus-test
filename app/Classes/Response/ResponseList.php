@@ -12,7 +12,7 @@ use Illuminate\Support\Collection;
  *      type="object",
  * )
  */
-class ResponseList extends ResponseData implements Arrayable
+class ResponseList extends ResponseData
 {
 
     /**
